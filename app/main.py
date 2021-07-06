@@ -1,4 +1,6 @@
 from commands.request import MarvelRequest
+
+import pandas as pd
 import sys
 
 
@@ -26,7 +28,16 @@ if __name__ == "__main__":
         
     command = MarvelRequest(limit=limit)
     command.get_all_heroes()
-    import pdb
-    pdb.set_trace()
+    df = pd.DataFrame(command.output, columns=["id",
+                                               "name",
+                                               "description",
+                                               "comics",
+                                               "series",
+                                               "stories",
+                                               "events"])
+    
+    compression_opts = dict(method='zip', archive_name='marvel.csv')
+    df.to_csv('marvel.zip', index=False, compression=compression_opts)
+    print("Compressed .csv Dataframe generated at marvel.zip")
 
 
