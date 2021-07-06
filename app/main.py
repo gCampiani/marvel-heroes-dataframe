@@ -25,7 +25,8 @@ if __name__ == "__main__":
         print(f'Default limit: {limit}')
         
     command = MarvelRequest(limit=limit)
-    response = command.get_all_heroes()
-
+    command.get_all_heroes()
+    import pdb
+    pdb.set_trace()
 
 

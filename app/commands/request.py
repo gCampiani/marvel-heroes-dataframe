@@ -51,7 +51,7 @@ class MarvelRequest:
         return {"id": hero["id"],
                 "name": hero["name"],
                 "description": hero["description"],
-                "comics": len(hero["comics"]),
-                "series": len(hero["series"]),
-                "stories": len(hero["stories"]),
-                "events": len(hero["events"])}
+                "comics": hero["comics"]["available"],
+                "series": hero["series"]["available"],
+                "stories": hero["stories"]["available"],
+                "events": hero["events"]["available"]}
