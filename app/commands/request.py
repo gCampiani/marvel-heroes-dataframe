@@ -4,6 +4,7 @@ import requests
 
 from datetime import datetime
 from decouple import config
+from tqdm import tqdm
 
 
 class MarvelRequest:
@@ -16,21 +17,21 @@ class MarvelRequest:
         self.url = config('CHARACTERS_URL')
  
     def get_all_heroes(self):
+        print("Executing...")
         content = self.do_request()
         if not content:
             self.output = None
             return
         self.output = [self.hero_to_dict(hero) for hero in content.json()["data"]["results"]]
-        self.refresh_cursor()
+        self.cursor += self.limit
         
-        while(self.cursor < content.json()["data"]["total"]):
+        for cursor in tqdm(range(self.cursor, content.json()["data"]["total"], self.limit)):
+            self.cursor = cursor
             self.output += [self.hero_to_dict(hero) for hero in self.do_request().json()["data"]["results"]]
             if not content:
                 self.output = None
                 return
-            self.refresh_cursor()
             
-    
     def do_request(self):
         params = {'ts': self.ts, 
                   'apikey': self.key, 
@@ -44,9 +45,6 @@ class MarvelRequest:
         if response.json()["code"] != 200:
             return None
         return response
-        
-    def refresh_cursor(self):
-        self.cursor += self.limit
 
     @staticmethod
     def hero_to_dict(hero):
