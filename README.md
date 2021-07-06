@@ -1,6 +1,6 @@
 # marvel-heroes-dataframe
 
-![Image of Marvel Logo](https://www.logosurfer.com/wp-content/uploads/2018/03/marvel-logo_0.png][img]https://www.logosurfer.com/wp-content/uploads/2018/03/marvel-logo_0.png)
+![Image of Marvel Logo](https://www.logosurfer.com/wp-content/uploads/2018/03/marvel-logo_0.png)
 
 Python 3.8.6rc1
 
